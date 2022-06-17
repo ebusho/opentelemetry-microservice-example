@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  users-api:
+    build: ./users-api
+    command: npm run watch
+    ports:
+      - "3030:3000"
+    volumes:
+      - ./users-api:/app
+    restart: 'unless-stopped'
+    extra_hosts:
+    - "host.docker.internal:host-gateway" # Access host services from within container
+
+  orders-api:
+    build: ./orders-api
+    command: npm run watch
+    ports:
+      - "4040:3000"
+    volumes:
+      - ./orders-api:/app
+    restart: 'unless-stopped'
+    extra_hosts:
+    - "host.docker.internal:host-gateway" # Access host services from within container
+
+  orders-ui:
+    build: ./orders-ui
+    ports:
+      - "8080:80"
+    volumes:
+      - ./orders-ui:/usr/share/nginx/html
+    restart: 'unless-stopped'
+    extra_hosts:
+    - "host.docker.internal:host-gateway" # Access host services from within container
