@@ -1,3 +1,7 @@
+"use strict";
+
+require("./tracing");
+
 const express = require("express");
 const fetch = require("node-fetch");
 
@@ -20,13 +24,14 @@ app.get('/orders/:username', async (req, res) => {
   try {
     const requestTimestamp = new Date()
 
-    const response = await fetch(`http://users-api:3000/users/${req.params.username}`);
+    // TODO: extract service endpoint as env variable
+    const response = await fetch(`http://users-api-service/users/${req.params.username}`);
     const userData = await response.json();
 
     res.json({
       user: userData.user,
       orders: [{
-        id: 0102,
+        id: 102,
         date: new Date(),
         products: [{
             id: 111,

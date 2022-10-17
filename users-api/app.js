@@ -1,3 +1,7 @@
+"use strict";
+
+require("./tracing");
+
 const express = require("express");
 const sleep = require('atomic-sleep')
 
