@@ -25,8 +25,10 @@ app.get('/orders/:username', async (req, res) => {
     const requestTimestamp = new Date()
 
     // TODO: extract service endpoint as env variable
-    const response = await fetch(`http://users-api-service/users/${req.params.username}`);
+    // const response = await fetch(`http://users-api-service/users/${req.params.username}`);
+    const response = await fetch(`http://users-api:3000/users/${req.params.username}`);
     const userData = await response.json();
+
 
     res.json({
       user: userData.user,
